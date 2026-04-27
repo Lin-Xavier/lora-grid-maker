@@ -1,19 +1,37 @@
-# LoRA Step Grid Maker, Qt portable build
+# LoRA Grid Maker (Portable)
 
-This version avoids tkinter entirely.
+LoRA Grid Maker is a small Windows GUI tool for comparing image samples generated during LoRA training. It creates a lossless PNG grid from multiple training sample images, with optional row labels such as `0 steps`, `500 steps`, `1000 steps`, and so on.
 
-The earlier tkinter build may fail with:
 
-```text
-ModuleNotFoundError: No module named 'tkinter'
-```
+This version avoids tkinter entirely and instead uses PySide6/Qt. PyInstaller bundles the Qt runtime into the final EXE, so the target computer does not need Python or tkinter.
 
-because Python's Windows embeddable distribution normally does not include Tcl/Tk.
+## Features
 
-This package instead uses PySide6/Qt. PyInstaller bundles the Qt runtime into the final EXE, so the target computer does not need Python or tkinter.
+- Drag and drop images or folders
 
-## Build
+- Set the number of columns before generating the grid
 
+- Add row labels based on training steps
+
+- Optionally label by file name
+
+- Paste images at original pixel size
+
+- No resizing, cropping, or resampling
+
+- Export as PNG
+
+## Lossless
+
+The program does not resize, crop, or resample source images. Each image is pasted onto a larger PNG canvas at its original pixel size. PNG compression is lossless.
+
+If the source images are JPEG files, their existing JPEG compression artefacts remain, but the grid generation step does not introduce a new JPEG compression pass.
+
+
+## Install
+### Build from source
+
+This project can be built without installing Python system-wide. The build script downloads the official Windows embeddable Python into a local portable_python folder, installs dependencies there, and freezes the app into a single EXE.
 1. Extract the whole ZIP.
 2. Double click:
 
@@ -21,7 +39,7 @@ This package instead uses PySide6/Qt. PyInstaller bundles the Qt runtime into th
 build_portable_qt_no_python_install.bat
 ```
 
-The final file will be:
+3. The final file will be:
 
 ```text
 dist\LoRA_Grid_Maker.exe
@@ -29,18 +47,14 @@ dist\LoRA_Grid_Maker.exe
 
 You can copy only that EXE to another Windows computer.
 
-## Notes
+Requirements for building:
+* Windows 10 or later
+* Internet access during the first build
 
-The first build needs internet access because it downloads portable Python and Python packages.
+Source dependencies:
+* Pillow
+* PySide6
+* PyInstaller
 
-The generated EXE may be relatively large because it contains:
-- Python runtime
-- PySide6/Qt GUI runtime
-- Pillow
-- the app code
-
-## Lossless behaviour
-
-The program does not resize, crop, or resample source images. It pastes each image onto a larger PNG canvas at original pixel size. PNG compression is lossless.
-
-If the source images are JPEG, their existing JPEG artefacts remain, but the grid generation step does not add another JPEG compression pass.
+### Download EXE
+Alternatively download the latest Windows EXE from the Releases page.
