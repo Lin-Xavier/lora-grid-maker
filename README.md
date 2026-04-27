@@ -5,6 +5,10 @@ LoRA Grid Maker is a small Windows GUI tool for comparing image samples generate
 
 This version avoids tkinter entirely and instead uses PySide6/Qt. PyInstaller bundles the Qt runtime into the final EXE, so the target computer does not need Python or tkinter.
 
+## Screenshot
+
+![LoRA Grid Maker interface](assets/interface.png)
+
 ## Features
 
 - Drag and drop images or folders
