@@ -12,7 +12,7 @@ LoRA Grid Maker is a small Windows GUI tool for comparing image samples generate
 - No resizing, cropping, or resampling
 - Export as PNG
 
-## Lossless behaviour
+## Lossless
 
 The program does not resize, crop, or resample source images. Each image is pasted onto a larger PNG canvas at its original pixel size. PNG compression is lossless.
 
